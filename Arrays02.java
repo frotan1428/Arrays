@@ -1,74 +1,56 @@
-package day14staticarraysforeachLoop;
+package day15ForEachLoop;
 
 import java.util.Arrays;
 
 public class Arrays02 {
 
     public static void main(String[] args) {
+        //Check if the array elements are in the natural order. "A", "B", "C" ==> true  -  "A", "C", "B" ==> false
 
-     //Create a String array and print the elements in alphabetical order on  the console in different lines
-        // 1.Create a String array
-        System.out.println("====Q1=======");
-        String myString[]=new String[4];// [null,null,null,null]
-        System.out.println(Arrays.toString(myString));
-
-        // add Element int array
-        myString[0]="veli";
-        myString[1]="Can";
-        myString[2]="beyhan";
-        myString[3]="Ali";
-        System.out.println("=====Q2======");
-        System.out.println(Arrays.toString(myString));
-        // how to put Element in alphabetical order
-        System.out.println("=====Q3======");
-        Arrays.sort(myString);
-       System.out.println(Arrays.toString(myString));
-
-        // how to print the element in different lines.
-        for (String W:myString){
-            System.out.println(W);
+        //Correct Solution 1
+        String srr[] = {"Ayhan", "Ceyhan", "Beyhan"};
+        System.out.println(Arrays.toString(srr));
+        //Create a new array and put the elements into the new array
+        String trr[] = new String[3];
+        //If you want to keep original array same, transfer the elements one by one
+        //By using loop you will have same elements in 2 different reserved area
+        for(int i=0; i<3; i++){
+            trr[i] = srr[i];
         }
-        System.out.println("====Q4=======");
-        //print the list element if the number of Character is less than 4
-       for (String W:myString){
-           if(W.length()<4){
-               System.out.println(W);
-           }
-       }
-        System.out.println("====Q5=======");
-        // print the List element if you Print "Can" stop printing.
-        for (String W:myString){
-            System.out.println(W);
-            if (W.equals("Can")){
-                break;
-            }
-        }
-        System.out.println("====Q6=======");
-        // print the List element if you before "Can" stop printing.
-        for (String W:myString){
-
-            if (W.equals("Can")){
-                break;
-            }
-            System.out.println(W);
-        }
-        System.out.println("====Q7=======");
-        // print the List except "Can" stop printing.
-        //1.way
-        for (String W:myString){
-         if (!W.equals("Can")){
-             System.out.println(W);
-         }
-        }
-        System.out.println("====Q8=======");
-        // 2.way
-        for (String W:myString){
-            if (W.equals("Can")){
-                continue;// continue to expect the specific element or Skips element/s under some conditions
-            }
-            System.out.println(W);
+        System.out.println("Before sort: " + Arrays.toString(trr));
+        Arrays.sort(trr);
+        System.out.println("After sort: " + Arrays.toString(trr));
+        if(Arrays.equals(srr,trr)){
+            System.out.println("Array elements are in natural order");
+        }else{
+            System.out.println("Array elements are not in natural order");
         }
 
+        //Correct Solution 2
+        String mrr[] = {"Ayhan", "Ceyhan", "Beyhan"};
+        System.out.println(Arrays.toString(mrr));
+        //If you want to keep original array same, use the copyOf() method
+        //By using copyOf() method you will have same elements in 2 different reserved area
+        String nrr[] = Arrays.copyOf(mrr, 3);
+        Arrays.sort(nrr);
+
+        if(Arrays.equals(mrr,nrr)){
+            System.out.println("Array elements are in natural order");
+        }else{
+            System.out.println("Array elements are not in natural order");
+        }
+
+        //Wrong solution
+        String urr[] = {"Ayhan", "Ceyhan", "Beyhan"};
+        System.out.println(Arrays.toString(urr));
+        //If you assign an array into another array they will use same reserved area, do not forget!!!
+        String prr[] = urr;
+        Arrays.sort(prr);
+        if(Arrays.equals(urr,prr)){
+            System.out.println("==> Array elements are in natural order");
+        }else{
+            System.out.println("==> Array elements are not in natural order");
+        }
 
     }
 }
